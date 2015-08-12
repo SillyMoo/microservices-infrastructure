@@ -1,10 +1,4 @@
 ---
-- name: reload systemd daemon
-  sudo: yes
-  command: systemctl daemon-reload
-  tags:
-    - logstash
-
 - name: enable and start logstash
   sudo: yes
   service:

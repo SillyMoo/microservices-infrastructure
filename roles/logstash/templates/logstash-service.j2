@@ -9,7 +9,7 @@ Restart=on-failure
 RestartSec=20
 TimeoutStartSec=20m
 
-ExecStartPre=-/usr/bin/docker rm logstash
+ExecStartPre=-/usr/bin/docker rm -f logstash
 ExecStartPre=-/usr/bin/docker pull {{ logstash_image }}:{{ logstash_image_tag }}
 
 ExecStart=/usr/bin/docker run \
@@ -23,15 +23,14 @@ ExecStart=/usr/bin/docker run \
 {% if logstash_input_log4j %}
     --publish={{ logstash_log4j_port }}:{{ logstash_log4j_port }}/tcp \
 {% endif %}
-    --volume=/etc/logstash.d:/opt/logstash/conf.d \
+    --volume=/etc/logstash.d:/config-dir \
     --volume=/var/lib/docker/containers:/logs/docker:ro \
     --volume=/var/log/mesos:/logs/mesos:ro \
     --volume=/var/log/zookeeper:/logs/zookeeper:ro \
-    {{ logstash_image }}:{{ logstash_image_tag }}
+    {{ logstash_image }}:{{ logstash_image_tag }} \
+    logstash -f /config-dir/logstash.conf
 
-ExecStop=/bin/bash -c " \
-    /usr/bin/docker kill logstash && \
-    /usr/bin/docker rm logstash"
+ExecStop=-/usr/bin/docker rm -f logstash
 
 [Install]
 WantedBy=multi-user.target

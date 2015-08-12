@@ -37,7 +37,7 @@ Security
 Operations
 ----------
 
-| |_| Logging
+| |x| Logging
 | |_| Metrics
 | |_| In-service upgrade with rollback
 | |_| Autoscaling of Resource Nodes

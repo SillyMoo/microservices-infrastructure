@@ -1,7 +1,7 @@
 Logstash
 ========
 
-Logging role for deploying and managing `Logstash <http://logstash.net>`_ 1.5 with Docker and systemd.
+Logging role for deploying and managing `Logstash <http://logstash.net>`_ with Docker and systemd.
 
 Variables
 ---------

@@ -1,6 +1,6 @@
 ---
-logstash_image: ciscocloud/logstash
-logstash_image_tag: 0.2
+logstash_image: logstash
+logstash_image_tag: 1.5.3
 
 # Stdout
 logstash_output_stdout: no
